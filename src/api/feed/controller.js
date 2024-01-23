@@ -5,7 +5,8 @@ exports.index = async (req, res) => {
   const user = req.user;
 
   const { page = 1, size = 20 } = req.query;
-  const items = await repository.index(page, size, date);
+  console.log(user.id);
+  const items = await repository.index(page, size, date, user.id);
   res.send({ result: "ok", data: items });
 };
 

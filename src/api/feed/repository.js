@@ -1,13 +1,13 @@
 const { pool } = require("../../data");
 
-exports.index = async (page, size, date) => {
+exports.index = async (page, size, date, user_id) => {
   const offset = (page - 1) * size;
   // console.log(date);
   const query = `SELECT feed.*, u.name user_name FROM feed
-  LEFT JOIN user u on u.id = feed.user_id WHERE DATE_FORMAT(feed.created_at, '%Y-%m-%d')=DATE_FORMAT(?, '%Y-%m-%d')
+  LEFT JOIN user u on u.id = feed.user_id WHERE DATE_FORMAT(feed.created_at, '%Y-%m-%d')=DATE_FORMAT(?, '%Y-%m-%d') AND feed.user_id=?
     ORDER BY feed.created_at DESC
     LIMIT ? OFFSET ?`;
-  return await pool(query, [date, size, offset]);
+  return await pool(query, [date, user_id, size, offset]);
 };
 
 exports.create = async (user, title, content) => {
