@@ -1,1 +1,1 @@
-# Dayday_server
+# Dayday
