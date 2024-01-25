@@ -5,7 +5,7 @@ exports.index = async (req, res) => {
   const user = req.user;
 
   const { page = 1, size = 20 } = req.query;
-  console.log(user.id);
+  // console.log(user.id);
   const items = await repository.index(page, size, date, user.id);
   res.send({ result: "ok", data: items });
 };
@@ -28,7 +28,7 @@ exports.show = async (req, res) => {
 
   const item = await repository.show(id);
   item["is_me"] = user.id == item.user_id;
-  console.log("show : " + user.id + " " + item.user_id);
+  // console.log("show : " + user.id + " " + item.user_id);
   res.send({ result: "ok", data: item });
 };
 
